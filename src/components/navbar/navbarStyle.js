@@ -8,7 +8,7 @@ text-decoration: none;
 export const NavbarWrapper = styled.div`
 overflow: hidden;
 width: 100%;
-height: 100px;
+height: 90px;
 background: var(--Dark-Main-500, #0E1625);
 display: flex;
 justify-content: space-evenly;
