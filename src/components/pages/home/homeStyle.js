@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import { Link } from "react-router-dom";
+import testHoliday from "../../../assets/eid.png";
+import cardBG from "../../../assets/cardImage.png";
 
 export const HomeLink = styled(Link)`
 text-decoration: none;
@@ -131,6 +133,7 @@ display: flex;
 flex-direction:column;
 justify-content: space-between;
 height: 600px;
+
 `
 export const SectionTitle = styled.div`
 color: var(--Dark-Main-500, #0E1625);
@@ -174,4 +177,118 @@ width: 347px;
 height: 715px;
 flex-shrink: 0;
 `
+export const HolidaysWrapper = styled.div`
+height: 1350px;
+background: #F0F2FC;
+display: flex;
+flex-direction: column;
+align-items: center;
+padding:60px 90px;
+gap: 40px;
+`
+export const HolidaysTitle = styled.h1`
+color: var(--Light-Main-500, #1D45EF);
+font-family: Raleway;
+font-size: 46px;
+font-style: normal;
+font-weight: 800;
+margin:0px;
+`
+export const FilterButtonWrapper = styled.div`
+display: flex;
+gap: 10px;
+`
+export const FilterButton = styled.button`
+border-radius: 6px;
+border: 1px solid var(--Light-Main-500, #1D45EF);
+padding: 10px 30px;
+color: var(--Light-Main-500, #1D45EF);
+font-family: Raleway;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+&:hover{
+    background-color: var(--Light-Main-500, #1D45EF); /* Change to desired background color */
+    color: white; /* Change to desired text color */
+    cursor: pointer; /* Optional: Change cursor to pointer on hover */
+  }
+`
+export const HolidayCard = styled.div`
+height: 368px;
+border-radius: 20px;
+background: #FFF;
+display: flex;
+padding: 40px 0px 20px 50px;
+`
+export const HolidayName = styled.h1`
+color: var(--Light-Main-500, #1D45EF);
+font-family: Raleway;
+font-size: 34px;
+font-style: normal;
+font-weight: 800;
+line-height: 42px; 
+margin: 0px;
+`
+export const HolidayInfo = styled.p`
+color: var(--Dark-Main-500, #0E1625);
+font-family: Raleway;
+font-size: 22px;
+font-style: normal;
+font-weight: 400;
+line-height: 30px;
+margin-top: 12px;
+`
+export const DateAndTypeWrapper = styled.div`
+display: flex;
+width: 482px;
+height: 66px;
+justify-content: space-around;
+align-items: center;
+gap: 20px;
+flex-shrink: 0;
+background: var(--Light-100, #F0F2FC);
+border-radius: 8px;
+margin-top: 28px;
+`
 
+export const DateAndType = styled.p`
+color: var(--Dark-Main-500, #0E1625);
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+margin: 0px;
+`
+
+export const DateAndTypeInfo = styled.p`
+color: var(--Light-Main-500, #1D45EF);
+font-family: Raleway;
+font-size: 18px;
+font-style: normal;
+font-weight: 800;
+line-height: 24px;
+margin: 0px;
+width: max-content;
+`
+export const Line = styled.div`
+height: 50px;
+width: 2px;
+background: var(--Light-200, #D2DAFC);
+`
+export const ImageWrapper = styled.div`
+width: 422px;
+height: 281px;
+flex-shrink: 0;
+background-image: url(${testHoliday});
+border-radius:25px;
+`
+export const CardBgImage = styled.div`
+width: 150px;
+flex-shrink: 0;
+background-image: url(${cardBG});
+background-size: contain;
+background-repeat: no-repeat;
+
+`

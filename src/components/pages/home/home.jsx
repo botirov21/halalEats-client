@@ -6,8 +6,21 @@ import {
   AboutUsText,
   AboutUsTitle,
   AboutUsWrapper,
+  CardBgImage,
+  DateAndType,
+  DateAndTypeInfo,
+  DateAndTypeWrapper,
+  FilterButton,
+  FilterButtonWrapper,
+  HolidayCard,
+  HolidayInfo,
+  HolidayName,
+  HolidaysTitle,
+  HolidaysWrapper,
   HomeLink,
   HomeWrapper,
+  ImageWrapper,
+  Line,
   PhoneIconBg,
   PhoneIconWrapper,
   SectionData,
@@ -30,7 +43,7 @@ import AboutUsIcon2 from "../../../assets/aboutUs2.png";
 import AboutUsIcon3 from "../../../assets/aboutUs3.png";
 import AboutUsIcon4 from "../../../assets/aboutUs4.png";
 import phoneIcon from "../../../assets/phoneIcon.png";
-
+import { card } from "../../mock/holidaysData";
 import { Box, Button } from "@mui/material";
 
 const slides = [
@@ -46,6 +59,7 @@ const slides = [
             background: "var(--Light-Main-500, #1D45EF);",
             padding: "10px 30px 10px 30px",
             borderRadius: "10px",
+            fontFamily: "Raleway"
           }}
           variant="contained"
         >
@@ -66,8 +80,10 @@ const slides = [
             background: "var(--Light-Main-500, #1D45EF);",
             padding: "10px 30px 10px 30px",
             borderRadius: "10px",
+            fontFamily: "Raleway"
           }}
           variant="contained"
+          
         >
           Read More
         </Button>
@@ -86,6 +102,7 @@ const slides = [
             background: "var(--Light-Main-500, #1D45EF);",
             padding: "10px 30px 10px 30px",
             borderRadius: "10px",
+            fontFamily: "Raleway"
           }}
           variant="contained"
         >
@@ -100,6 +117,7 @@ const delay = 5000;
 const Home = () => {
   const [index, setIndex] = React.useState(0);
   const timeoutRef = React.useRef(null);
+  const holidayData = card.HolidayList;
 
   //funtion for image slider
   function resetTimeout() {
@@ -226,7 +244,9 @@ const Home = () => {
               </Box>
             </SectionData>
             <PhoneIconBg>
-                <PhoneIconWrapper><img style={{maxWidth: '100%'}} src={phoneIcon} alt="" /></PhoneIconWrapper>
+              <PhoneIconWrapper>
+                <img style={{ maxWidth: "100%" }} src={phoneIcon} alt="" />
+              </PhoneIconWrapper>
             </PhoneIconBg>
             <SectionData>
               <Box
@@ -260,6 +280,55 @@ const Home = () => {
           </AboutUsSections>
         </AboutUsDataWrapper>
       </AboutUsWrapper>
+      <HolidaysWrapper>
+        <Box sx={{display: 'flex', gap: '68px'}}>
+        <HolidaysTitle>Upcoming religious and secular holidays</HolidaysTitle>
+        <FilterButtonWrapper>
+          <FilterButton>All</FilterButton>
+          <FilterButton>Religious</FilterButton>
+          <FilterButton>Secular</FilterButton>
+        </FilterButtonWrapper>
+        </Box>
+        {holidayData.map((value, key) => {
+          return (
+            <HolidayCard key={key}>
+              <ImageWrapper />
+              <Box sx={{ paddingLeft: "50px" }}>
+                <HolidayName>{value.holiday.name}</HolidayName>
+                <HolidayInfo>{value.holiday.info}</HolidayInfo>
+                <DateAndTypeWrapper>
+                  <Box>
+                    <DateAndType>Date</DateAndType>
+                    <DateAndTypeInfo>{value.holiday.date}</DateAndTypeInfo>
+                  </Box>
+                  <Line />
+                  <Box>
+                    <DateAndType>Year</DateAndType>
+                    <DateAndTypeInfo>{value.holiday.year}</DateAndTypeInfo>
+                  </Box>
+                  <Line />
+                  <Box>
+                    <DateAndType>Type</DateAndType>
+                    <DateAndTypeInfo>{value.holiday.type}</DateAndTypeInfo>
+                  </Box>
+                </DateAndTypeWrapper>
+              </Box>
+              <CardBgImage />
+            </HolidayCard>
+          );
+        })}
+        <Button
+          sx={{
+            background: "var(--Light-Main-500, #1D45EF);",
+            padding: "16px 60px",
+            borderRadius: "10px",
+            fontFamily: "Raleway"
+          }}
+          variant="contained"
+        >
+          See More
+        </Button>
+      </HolidaysWrapper>
     </div>
   );
 };
