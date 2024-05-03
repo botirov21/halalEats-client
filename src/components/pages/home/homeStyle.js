@@ -1,4 +1,9 @@
 import styled from 'styled-components'
+import { Link } from "react-router-dom";
+
+export const HomeLink = styled(Link)`
+text-decoration: none;
+`
 
 export const HomeWrapper = styled.div`
   padding-top:100px;
@@ -53,7 +58,7 @@ export const SliderInfoWrapper = styled.div`
 display:flex;
 justify-content: space-around;
 align-items:center;
-width: 65%;  //mobile qilinyotganda ozgarishi mumkin
+width: 60%;  //mobile qilinyotganda ozgarishi mumkin
 height:100px;
 border-radius: 20px;
 background: #FFF;

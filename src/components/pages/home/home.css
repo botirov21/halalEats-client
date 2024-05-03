@@ -1,3 +1,4 @@
+
 /* Slideshow */
 
 .slideshow {
@@ -26,7 +27,7 @@
   text-align: center;
   z-index: 1;
   position: relative  ;
-  bottom: 40px;
+  bottom: 50px;
 }
 
 .slideshowDot {
