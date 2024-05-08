@@ -315,7 +315,7 @@ const Home = () => {
         </AboutUsSections>
       </AboutUsWrapper>
       <HolidaysWrapper>
-        <Box sx={{ display: "flex", gap: "68px" }}>
+        <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
           <Title>Upcoming religious and secular holidays</Title>
           <FilterButtonWrapper>
             <FilterButton>All</FilterButton>
@@ -364,7 +364,7 @@ const Home = () => {
         </Button>
       </HolidaysWrapper>
       <TopRateWrapper>
-        <Title>Top rated Restaurants</Title>
+        <Title style={{paddingTop: '30px'}}>Top rated Restaurants</Title>
         <Text>Stay up-to-date with the most popular halal restaurants</Text>
         <TopRateCardWrapper>
           {topRateData.map((cardValue, index) => (

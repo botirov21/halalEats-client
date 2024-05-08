@@ -110,7 +110,6 @@ export const AboutUsWrapper = styled.div`
 `;
 
 export const Title = styled.h1`
-  padding-top:20px;
   color: var(--Light-Main-500, #1d45ef);
   font-family: Raleway;
   font-size: 40px;
@@ -134,7 +133,7 @@ export const Text = styled.p`
 `;
 export const AboutUsSections = styled.div`
   display: flex;
-  height: 500px;
+  height: fit-content;
   justify-content: space-around;
   align-items: center;
   margin-top: 80px;
@@ -143,7 +142,8 @@ export const SectionData = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 500px;
+  gap: 5  0px;
+  height: fit-content;
 `;
 export const SectionTitle = styled.div`
   color: var(--Dark-Main-500, #0e1625);
@@ -203,13 +203,13 @@ export const FilterButtonWrapper = styled.div`
 export const FilterButton = styled.button`
   border-radius: 6px;
   border: 1px solid var(--Light-Main-500, #1d45ef);
-  padding: 0px 25px;
+  padding: 15px 25px;
   color: var(--Light-Main-500, #1d45ef);
   font-family: Raleway;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
-  line-height: 20px;
+  line-height: 2  0px;
   &:hover {
     background-color: var(--Light-Main-500, #1d45ef);
     color: white;
@@ -420,25 +420,26 @@ export const CardButton = styled.button`
 `;
 
 export const QuestionWrapper = styled.div`
-  height: 600px;
+  height: fit-content;
   background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 0px 260px;
+  padding: 0px 260px 80px 260px;
 `;
 export const AccordionWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-
+  padding-top:30px;
+ 
   .expansion-panel {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
     background: var(--Light-100, #f0f2fc);
-    padding: 20px 30px;
+    padding: 5px 10px;
     border-radius: 16px;
     &:before {
       height: 0px;
