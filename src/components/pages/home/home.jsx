@@ -23,27 +23,37 @@ import {
   HolidayCard,
   HolidayInfo,
   HolidayName,
+  HolidayTitle,
   HolidaysWrapper,
   HomeLink,
   HomeWrapper,
   ImageWrapper,
   Line,
+  NameAndInfoWrap,
   PhoneIconBg,
   PhoneIconWrapper,
+  QuestionTitle,
   QuestionWrapper,
   SectionData,
   SectionTitle,
   Sectiontext,
   SectiontextRight,
+  SliderButton,
+  SliderButtonWraper,
   SliderData,
+  SliderInfo,
   SliderInfoWrapper,
   SliderTypo,
   SliderWrapper,
   Text,
   Title,
+  TitleAndFilterWrapper,
+  TitleAndTextWrap,
+  TitleAndTextWrapRight,
   TopRateCard,
   TopRateCardWrapper,
   TopRateWrapper,
+  TypoAndDataWrap,
   WelcomeTextWrapper,
   WelcomeTitle,
   WelcomeTypo,
@@ -76,17 +86,9 @@ const slides = [
     location: "118.46.303.1",
     button: (
       <HomeLink to="/path">
-        <Button
-          sx={{
-            background: "var(--Light-Main-500, #1D45EF);",
-            padding: "10px 30px 10px 30px",
-            borderRadius: "10px",
-            fontFamily: "Raleway",
-          }}
-          variant="contained"
-        >
+        <SliderButton>
           Read More
-        </Button>
+        </SliderButton>
       </HomeLink>
     ),
   },
@@ -97,17 +99,9 @@ const slides = [
     location: "35.6895° N",
     button: (
       <HomeLink to="/path">
-        <Button
-          sx={{
-            background: "var(--Light-Main-500, #1D45EF);",
-            padding: "10px 30px 10px 30px",
-            borderRadius: "10px",
-            fontFamily: "Raleway",
-          }}
-          variant="contained"
-        >
+        <SliderButton>
           Read More
-        </Button>
+        </SliderButton>
       </HomeLink>
     ),
   },
@@ -118,17 +112,9 @@ const slides = [
     location: "41.0082° N",
     button: (
       <HomeLink to="/path">
-        <Button
-          sx={{
-            background: "var(--Light-Main-500, #1D45EF);",
-            padding: "10px 30px 10px 30px",
-            borderRadius: "10px",
-            fontFamily: "Raleway",
-          }}
-          variant="contained"
-        >
+        <SliderButton>
           Read More
-        </Button>
+        </SliderButton>
       </HomeLink>
     ),
   },
@@ -187,11 +173,11 @@ const Home = () => {
         <WelcomeTextWrapper>
           <WelcomeTitle>
             Find the Mosque, Shop and Halal Restaurants you need
-            <WelcomeTypo>
-              This project aims to create more convenience and opportunities for
-              Muslims.
-            </WelcomeTypo>
           </WelcomeTitle>
+          <WelcomeTypo>
+            This project aims to create more convenience and opportunities for
+            Muslims.
+          </WelcomeTypo>
         </WelcomeTextWrapper>
         <SliderWrapper>
           <div className="slideshow">
@@ -225,19 +211,21 @@ const Home = () => {
           </div>
         </SliderWrapper>
         <SliderInfoWrapper>
-          <Box>
-            <SliderTypo>Region</SliderTypo>
-            <SliderData>{slides[index].region}</SliderData>
-          </Box>
-          <Box>
-            <SliderTypo>Type</SliderTypo>
-            <SliderData>{slides[index].type}</SliderData>
-          </Box>
-          <Box>
-            <SliderTypo>Location</SliderTypo>
-            <SliderData>{slides[index].location}</SliderData>
-          </Box>
-          <SliderData>{slides[index].button}</SliderData>
+          <SliderInfo >
+            <TypoAndDataWrap>
+              <SliderTypo>Region</SliderTypo>
+              <SliderData>{slides[index].region}</SliderData>
+            </TypoAndDataWrap>
+            <TypoAndDataWrap>
+              <SliderTypo>Type</SliderTypo>
+              <SliderData>{slides[index].type}</SliderData>
+            </TypoAndDataWrap>
+            <TypoAndDataWrap>
+              <SliderTypo>Location</SliderTypo>
+              <SliderData>{slides[index].location}</SliderData>
+            </TypoAndDataWrap>
+          </SliderInfo>
+          <SliderButtonWraper>{slides[index].button}</SliderButtonWraper>
         </SliderInfoWrapper>
       </HomeWrapper>
       <AboutUsWrapper>
@@ -249,34 +237,22 @@ const Home = () => {
         </Text>
         <AboutUsSections>
           <SectionData>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "end",
-              }}
-            >
+            <TitleAndTextWrap>
               <img src={AboutUsIcon1} alt="AboutUs-Icon" />
               <SectionTitle>Mosques</SectionTitle>
               <Sectiontext>
                 Helping to find places to hold Friday prayers for Muslims
                 abroad.
               </Sectiontext>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "end",
-              }}
-            >
+            </TitleAndTextWrap>
+            <TitleAndTextWrap>
               <img src={AboutUsIcon2} alt="AboutUs-Icon" />
               <SectionTitle>Markets</SectionTitle>
               <Sectiontext>
                 Finding stores with halal certification for Muslims and
-                providing their addresses{" "}
+                providing their addresses
               </Sectiontext>
-            </Box>
+            </TitleAndTextWrap>
           </SectionData>
           <PhoneIconBg>
             <PhoneIconWrapper>
@@ -284,50 +260,38 @@ const Home = () => {
             </PhoneIconWrapper>
           </PhoneIconBg>
           <SectionData>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
+            <TitleAndTextWrapRight>
               <img src={AboutUsIcon3} alt="AboutUs-Icon" />
               <SectionTitle>Restaurants</SectionTitle>
-              <SectiontextRight>
+              <Sectiontext>
                 Find and guide you to restaurants serving halal food abroad.{" "}
-              </SectiontextRight>
-            </Box>
-            <Box
-              sx={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "start",
-              }}
-            >
+              </Sectiontext>
+            </TitleAndTextWrapRight>
+            <TitleAndTextWrapRight>
               <img src={AboutUsIcon4} alt="AboutUs-Icon" />
               <SectionTitle>Offer</SectionTitle>
-              <SectiontextRight>
+              <Sectiontext>
                 If you have any suggestions or questions, please send us a
                 message.
-              </SectiontextRight>
-            </Box>
+              </Sectiontext>
+            </TitleAndTextWrapRight>
           </SectionData>
         </AboutUsSections>
       </AboutUsWrapper>
       <HolidaysWrapper>
-        <Box sx={{ display: "flex", justifyContent: 'space-between', alignItems: 'center', width: '100%' }}>
-          <Title>Upcoming religious and secular holidays</Title>
+        <TitleAndFilterWrapper>
+          <HolidayTitle>Upcoming religious and secular holidays</HolidayTitle>
           <FilterButtonWrapper>
             <FilterButton>All</FilterButton>
             <FilterButton>Religious</FilterButton>
             <FilterButton>Secular</FilterButton>
           </FilterButtonWrapper>
-        </Box>
+        </TitleAndFilterWrapper>
         {holidayData.map((value, key) => {
           return (
             <HolidayCard key={key}>
-              <ImageWrapper />
-              <Box sx={{ paddingLeft: "50px" }}>
+              <ImageWrapper/>
+              <NameAndInfoWrap>
                 <HolidayName>{value.holiday.name}</HolidayName>
                 <HolidayInfo>{value.holiday.info}</HolidayInfo>
                 <DateAndTypeWrapper>
@@ -346,7 +310,7 @@ const Home = () => {
                     <DateAndTypeInfo>{value.holiday.type}</DateAndTypeInfo>
                   </Box>
                 </DateAndTypeWrapper>
-              </Box>
+              </NameAndInfoWrap>
               <CardBgImage />
             </HolidayCard>
           );
@@ -364,7 +328,7 @@ const Home = () => {
         </Button>
       </HolidaysWrapper>
       <TopRateWrapper>
-        <Title style={{paddingTop: '30px'}}>Top rated Restaurants</Title>
+        <Title style={{ paddingTop: "30px" }}>Top rated Restaurants</Title>
         <Text>Stay up-to-date with the most popular halal restaurants</Text>
         <TopRateCardWrapper>
           {topRateData.map((cardValue, index) => (
@@ -390,7 +354,7 @@ const Home = () => {
         </TopRateCardWrapper>
       </TopRateWrapper>
       <QuestionWrapper>
-        <Title>Frequently Asked Questions</Title>
+        <QuestionTitle>Frequently Asked Questions</QuestionTitle>
         <Text>
           Read news about new holidays added to our platform, pictures,
           locations, mosques and many more that benefit Muslims.

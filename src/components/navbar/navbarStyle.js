@@ -16,6 +16,17 @@ align-items:center;
 border-bottom: white solid 1px;
 position:fixed;
 z-index:3;
+@media (max-width: 1024px) {
+    justify-content: space-between;
+    padding: 0px 20px
+}
+@media (max-width: 820px) {
+    height: 70px;
+}
+@media (max-width: 435px) { 
+    height: 55px;
+
+}
 `
 export const WebsiteName = styled.p`
 color: var(--White, #FFF);
@@ -30,6 +41,10 @@ line-height: 36px;
 export const LinksWrapper = styled.div`
 display: flex;
 gap:60px;
+@media (max-width: 1024px) {
+    display: none
+}
+
 `
 export const NavbarLink = styled.div`
 cursor: pointer;
@@ -43,5 +58,15 @@ font-weight: 600;
 line-height: 30px; 
 `
 export const LoginWraper = styled.div`
-display:flex
+display:flex;
+@media (max-width: 1024px) {
+    display:flex;
+    justify-content: space-between;
+}
+@media (max-width: 820px) {
+  }
+  @media (max-width: 435px) {
+    display: none
+
+}
 `

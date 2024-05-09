@@ -84,6 +84,16 @@ export const FooterLinkWrapper = styled.div`
   align-items: center;
   width: 80%;
   gap: 20px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
+  @media (max-width: 820px) {
+ display: none
+
+}
+@media (max-width: 435px) { 
+    display: none
+}
 `;
 export const FooterLink = styled.p`
   color: var(--Light-200, #d2dafc);
