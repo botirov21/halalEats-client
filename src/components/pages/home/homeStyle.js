@@ -291,32 +291,22 @@ export const SliderButtonWraper = styled.div`
     width: 100%;
   }
 `;
-export const SliderButton = styled.button`
-  display: inline-block;
-  justify-content: center;
-  height: fit-content;
-  padding: 16px 60px;
-  border-radius: 4px;
-  color: white;
-  border: none;
-  background: var(--Light-Main-500, #1d45ef);
-  &:hover {
-    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.7);
-    cursor: pointer;
-  }
-  @media (max-width: 820px) {
-    display: flex;
-    padding: 10px 0px;
 
-    width: 100%;
-  }
-  @media (max-width: 435px) {
-    display: flex;
-    padding: 10px 0;
-    width: 100%;
-  }
-`;
-
+export const StyleBtn = {
+  padding: "16px 60px",
+  background: "var(--Light-Main-500, #1D45EF)",
+  borderRadius: "10px",
+  '@media (max-width: 820px)': {
+    display: 'flex',
+    padding: '10px 0px',
+    width: '100%',
+  },
+  '@media (max-width: 435px)': {
+    display: 'flex',
+    padding: '10px 0',
+    width: '100%',
+  },
+}
 export const AboutUsWrapper = styled.div`
   height: 800px;
   background: #fff;

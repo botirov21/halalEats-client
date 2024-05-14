@@ -37,14 +37,13 @@ import {
   SectionData,
   SectionTitle,
   Sectiontext,
-  SectiontextRight,
-  SliderButton,
   SliderButtonWraper,
   SliderData,
   SliderInfo,
   SliderInfoWrapper,
   SliderTypo,
   SliderWrapper,
+  StyleBtn,
   Text,
   Title,
   TitleAndFilterWrapper,
@@ -86,9 +85,9 @@ const slides = [
     location: "118.46.303.1",
     button: (
       <HomeLink to="/path">
-        <SliderButton>
+        <Button variant="contained" sx={StyleBtn}>
           Read More
-        </SliderButton>
+        </Button>
       </HomeLink>
     ),
   },
@@ -99,9 +98,9 @@ const slides = [
     location: "35.6895° N",
     button: (
       <HomeLink to="/path">
-        <SliderButton>
+        <Button variant="contained" sx={StyleBtn}>
           Read More
-        </SliderButton>
+        </Button>
       </HomeLink>
     ),
   },
@@ -112,9 +111,9 @@ const slides = [
     location: "41.0082° N",
     button: (
       <HomeLink to="/path">
-        <SliderButton>
+        <Button variant="contained" sx={StyleBtn}>
           Read More
-        </SliderButton>
+        </Button>
       </HomeLink>
     ),
   },

@@ -110,6 +110,6 @@ export const FooterLine = styled.div`
   width: 100%;
   fill: var(--Light-200, #d2dafc);
   stroke-width: 4px;
-  stroke: var(--Light-Main-500, #1d45ef);
+  stroke: var(--LightMain--500, #1d45ef);
   opacity: 0.2;
 `;

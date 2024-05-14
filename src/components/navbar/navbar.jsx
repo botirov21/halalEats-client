@@ -28,7 +28,9 @@ const Navbar = () => {
         <NavLink to="/">
           <NavbarLink> Home</NavbarLink>
         </NavLink>
-        <NavbarLink>Mosques</NavbarLink>
+        <NavLink to="/mosques">
+          <NavbarLink>Mosques</NavbarLink>
+        </NavLink>
         <NavbarLink>Restaurants</NavbarLink>
         <NavbarLink>Markets</NavbarLink>
       </LinksWrapper>
