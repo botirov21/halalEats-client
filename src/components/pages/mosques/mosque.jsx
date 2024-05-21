@@ -11,6 +11,7 @@ import {
   LocationIconStyle,
   LocationWrapper,
   MosqueBg,
+  MosqueLink,
   MosqueText,
   MosqueTextWrap,
   MosqueTitle,
@@ -28,6 +29,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { card } from "../../mock/mosqueData";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
+import { Bounce } from "react-awesome-reveal";
+
 const Mosques = () => {
   const mosqueData = card.MosqueList;
   return (
@@ -101,26 +104,32 @@ const Mosques = () => {
         </FilterWrapper>
       </MosqueBg>
       <CardWrapper>
-        {mosqueData.map((value, key) => {
-          return (
-            <Card key={key}>
-              <Image />
-              <NameWrapper>
-                <Name>{value.mosque.name}</Name>
-                <CardButton>
-                  <ArrowOutwardIcon sx={LocationIconStyle} />
-                </CardButton>
-              </NameWrapper>
-              <LocationWrapper>
-                <LocationOnIcon sx={LocationIconStyle} />
-                <Location>{value.mosque.location}</Location>
-              </LocationWrapper>
-            </Card>
-          );
-        })}
+        <Bounce>
+          {mosqueData.map((value, key) => {
+            return (
+              <MosqueLink key={key} to={`/mosqueDetail/${value.id}`}>
+                <Card>
+                  <Image />
+                  <NameWrapper>
+                    <Name>{value.mosque.name}</Name>
+                    <CardButton>
+                      <ArrowOutwardIcon sx={LocationIconStyle} />
+                    </CardButton>
+                  </NameWrapper>
+                  <LocationWrapper>
+                    <LocationOnIcon sx={LocationIconStyle} />
+                    <Location>{value.mosque.location}</Location>
+                  </LocationWrapper>
+                </Card>
+              </MosqueLink>
+            );
+          })}
+        </Bounce>
       </CardWrapper>
       <ButtonWrapper>
-         <Button sx={seeMoreButton} variant="contained">See More</Button>
+        <Button sx={seeMoreButton} variant="contained">
+          See More
+        </Button>
       </ButtonWrapper>
     </MosquesWrapper>
   );

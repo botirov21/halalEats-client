@@ -784,7 +784,7 @@ export const TopRateCard = styled.div`
   border-bottom-right-radius: 40px;
   transform: ${({ isbuttonhovered }) =>
     isbuttonhovered ? "scale(1.05)" : "scale(1)"};
-  transition: 0.2s transform ease-in-out;
+  transition: transform 400ms ease-in;
   animation: ${({ isbuttonhovered }) =>
     isbuttonhovered
       ? css`

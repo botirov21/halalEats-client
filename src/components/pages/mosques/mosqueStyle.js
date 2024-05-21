@@ -1,6 +1,11 @@
 import styled from "styled-components"
+import { Link } from "react-router-dom";
 import mosqueBg from "../../../assets/mosqueBg.png"
 import mosqueImage from "../../../assets/mosqueImage.png"
+export const MosqueLink = styled(Link)`
+  text-decoration: none;
+  width: 100%;
+`;
 export const MosquesWrapper = styled.div`
 padding-top: 70px;
 padding-bottom: 100px;
