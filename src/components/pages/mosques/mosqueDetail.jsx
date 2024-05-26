@@ -10,19 +10,74 @@ import {
   TitleWrapper,
 } from "./mosqueDetailStyle";
 import { card } from "../../mock/mosqueData";
+import MultiCarousel from "./multiCarusel";
 
 const MosqueDetail = () => {
   const { id } = useParams();
   const [dataByID, setDataByID] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [carouselData, setCarouselData] = useState([]);
+
+  useEffect(() => {
+    const fetchMosque = async () => {
+      try {
+        const mosqueData = await fetchMosqueById(id);
+        if (mosqueData) {
+          setDataByID(mosqueData);
+          filterCarouselData(id);
+        } else {
+          setError("Mosque not found");
+        }
+      } catch (error) {
+        console.error("Error fetching mosque:", error);
+        setError("Failed to fetch mosque");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchMosque();
+  }, [id]);
+
+  const filterCarouselData = (currentId) => {
+    const filteredData = card.MosqueList.filter(
+      (mosque) => mosque.id !== parseInt(currentId)
+    );
+    setCarouselData(filteredData);
+  };
+
+  const handleCarouselItemClick = async (selectedId) => {
+    try {
+      const mosqueData = await fetchMosqueById(selectedId);
+      if (mosqueData) {
+        setDataByID(mosqueData);
+        filterCarouselData(selectedId);
+      } else {
+        setError("Mosque not found");
+      }
+    } catch (error) {
+      console.error("Error fetching mosque:", error);
+      setError("Failed to fetch mosque");
+    }
+  };
 
   const fetchMosqueById = async (id) => {
+    // Simulated API call
     await new Promise((resolve) => setTimeout(resolve, 500));
     const mosque = card.MosqueList.find((mosque) => mosque.id === parseInt(id));
-    console.log("Fetched mosque:", mosque);
     return mosque;
   };
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
+
+  useEffect(() => {
+    if (dataByID && dataByID.mosque.latitude && dataByID.mosque.longitude) {
+      loadKakaoMap(dataByID.mosque.latitude, dataByID.mosque.longitude);
+    }
+  }, [dataByID]);
 
   const loadKakaoMap = async (latitude, longitude) => {
     if (!window.kakao || !window.kakao.maps) {
@@ -62,32 +117,6 @@ const MosqueDetail = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchMosque = async () => {
-      try {
-        const mosqueData = await fetchMosqueById(id);
-        if (mosqueData) {
-          setDataByID(mosqueData);
-        } else {
-          setError("Mosque not found");
-        }
-      } catch (error) {
-        console.error("Error fetching mosque:", error);
-        setError("Failed to fetch mosque");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchMosque();
-  }, [id]);
-
-  useEffect(() => {
-    if (dataByID && dataByID.mosque.latitude && dataByID.mosque.longitude) {
-      loadKakaoMap(dataByID.mosque.latitude, dataByID.mosque.longitude);
-    }
-  }, [dataByID]);
-
   if (loading) {
     return (
       <DetailWrapper>
@@ -106,22 +135,20 @@ const MosqueDetail = () => {
 
   return (
     <DetailWrapper>
-      {dataByID ? (
-        <DetailWrapper>
-          <Container>
-            <TitleWrapper>
-              <Title>{dataByID.mosque.name}</Title>
-              <Text>Location: {dataByID.mosque.location}</Text>
-              <Text>Info: {dataByID.mosque.info}</Text>
-            </TitleWrapper>
-            <ImageWrapper />
-          </Container>
-          <Title> Mosque Location</Title>
-          <Map id="map" />
-        </DetailWrapper>
-      ) : (
-        <p>No data available</p>
-      )}
+      <Container>
+        <TitleWrapper>
+          <Title>{dataByID.mosque.name}</Title>
+          <Text>Location: {dataByID.mosque.location}</Text>
+          <Text>Info: {dataByID.mosque.info}</Text>
+        </TitleWrapper>
+        <ImageWrapper />
+      </Container>
+      <Title> Mosque Location</Title>
+      <Map id="map" />
+      <MultiCarousel
+        data={carouselData}
+        onItemClick={handleCarouselItemClick}
+      />
     </DetailWrapper>
   );
 };

@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import Image  from "../../../assets/mosqueImage.png"
-import Slider from "react-slick";
 
 export const DetailWrapper = styled.div`
 display: flex;
@@ -75,31 +74,8 @@ export const Map = styled.div`
     border-width: medium;
     border-color: #D8D8D8;
 `
-export const CustomSlider = styled(Slider)`
-  .slick-prev,
-  .slick-next {
-    width: 40px;
-    height: 40px;
-    z-index: 1;
-  }
-
-  .slick-prev {
-    left: 10px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    &:before {
-      content: "";
-    }
-  }
-
-  .slick-next {
-    right: 10px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    &:before {
-      content: "";
-    }
-  }
-`;
+export const SliderStyle = styled.div`
+border: solid 1px black;
+display: flex;
+height: 200px;
+`
