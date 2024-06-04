@@ -8,11 +8,41 @@ padding:100px;
 height:fit-content;
 align-items: center;
 gap: 50px;
+@media (max-width: 435px) {
+    padding:0px;
+    padding-top: 90px;
+}
+`
+export const PageLocationWrap = styled.div`
+display: flex;
+align-items: center;
+padding: 10px;
+border-radius: 8px;
+border: 1px solid var(--Light-200, #D2DAFC);
+background: var(--Light-100, #F0F2FC);
+width: 40%;
+@media (max-width: 1200px) {
+display: none;
+}
+`
+export const PageLocatioInfo = styled.p`
+color: var(--Primary-1, #0F2C59);
+font-family: Raleway;
+font-size: 14px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
 `
 export const Container = styled.div`
 display: flex;
 height:fit-content;
 gap: 40px;
+@media (max-width: 1200px) {
+flex-direction:column;
+}
+@media (max-width: 435px) {
+        width: 80%;
+}
 `
 
 export const TitleWrapper = styled.div`
@@ -32,6 +62,9 @@ font-style: normal;
 font-weight: 800;
 line-height: 60px;
 margin: 0px;
+@media (max-width: 435px) {
+    font-size: 28px;
+}
 `
 export const Text = styled.p`
 color: var(--Dark-Main-500, #0E1625);
@@ -41,7 +74,9 @@ font-style: normal;
 font-weight: 400;
 line-height: 30px;
 margin: 0px;
-
+@media (max-width: 435px) {
+    font-size: 14px;
+}
 `
 
 export const ImageWrapper = styled.div`
@@ -52,6 +87,29 @@ height: 300px;
 width: 100%;
 display: flex;
 flex: 1;
+@media (max-width: 435px) {
+    display: none;
+
+}
+`
+export const ResposiveImageWrapper = styled.div`
+display: none;
+@media (max-width: 1200px) {
+background-image: url(${Image});
+background-size: cover;
+background-repeat: no-repeat;
+height: 400px;
+width: 100%;
+display: flex;
+}
+@media (max-width: 435px) {
+background-image: url(${Image});
+background-size: cover;
+background-repeat: no-repeat;
+height: 200px;
+width: 100%;
+display: flex;
+}
 `
 export const MapWrapper = styled.div`
     width: 100%;
@@ -66,13 +124,19 @@ export const MapWrapper = styled.div`
 `
 export const Map = styled.div`
     width: 100%;
-    height: 500px;
+    height: 400px;
     justify-content: center;
     margin-left: auto;
     margin-right: auto;
     border-style: solid;
     border-width: medium;
     border-color: #D8D8D8;
+    border-radius: 10px;
+    @media (max-width: 435px) {
+        height: 200px;
+        width: 80%;
+    }
+;
 `
 export const SliderStyle = styled.div`
 border: solid 1px black;

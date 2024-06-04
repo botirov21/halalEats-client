@@ -6,6 +6,7 @@ import {
   CardWrapper,
   FilterWrapper,
   Image,
+  InputBtn,
   InputStyle,
   Location,
   LocationIconStyle,
@@ -18,6 +19,8 @@ import {
   MosquesWrapper,
   Name,
   NameWrapper,
+  ResponsiveInputBtn,
+  SelectFilter,
   seeMoreButton,
 } from "./mosqueStyle";
 import Select, { selectClasses } from "@mui/joy/Select";
@@ -44,6 +47,7 @@ const Mosques = () => {
           </MosqueText>
         </MosqueTextWrap>
         <FilterWrapper>
+          <SelectFilter>
           <Select
             className="selectStyle"
             placeholder="Select region"
@@ -65,6 +69,7 @@ const Mosques = () => {
             <Option value="bird">Bird</Option>
           </Select>
           <Select
+            className="selectStyle"
             placeholder="Select city"
             indicator={<KeyboardArrowDown />}
             sx={{
@@ -83,10 +88,14 @@ const Mosques = () => {
             <Option value="fish">Fish</Option>
             <Option value="bird">Bird</Option>
           </Select>
+          </SelectFilter>
           <Input
             className="InputStyle"
             endDecorator={
-              <Button
+              <>
+              <InputBtn>
+              <Button 
+                className="inputBtn"
                 sx={{
                   background: "var(--Light-Main-500, #1D45EF)",
                   borderRadius: "10px",
@@ -97,6 +106,21 @@ const Mosques = () => {
                 <SearchIcon />
                 Search
               </Button>
+              </InputBtn>
+              <ResponsiveInputBtn>
+              <Button 
+                className="inputBtn"
+                sx={{
+                  background: "var(--Light-Main-500, #1D45EF)",
+                  borderRadius: "5px",
+                  padding: "10px 20px",
+                }}
+                variant="contained"
+              >
+                <SearchIcon />
+              </Button>
+              </ResponsiveInputBtn>
+              </>
             }
             placeholder="Write mosque name"
             sx={InputStyle}

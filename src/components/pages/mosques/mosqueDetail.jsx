@@ -5,12 +5,17 @@ import {
   DetailWrapper,
   ImageWrapper,
   Map,
+  PageLocatioInfo,
+  PageLocationWrap,
+  ResposiveImageWrapper,
   Text,
   Title,
   TitleWrapper,
 } from "./mosqueDetailStyle";
 import { card } from "../../mock/mosqueData";
 import MultiCarousel from "./multiCarusel";
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import { Box } from "@mui/material";
 
 const MosqueDetail = () => {
   const { id } = useParams();
@@ -136,7 +141,15 @@ const MosqueDetail = () => {
   return (
     <DetailWrapper>
       <Container>
+        <ResposiveImageWrapper/>
         <TitleWrapper>
+        <PageLocationWrap>
+        <PageLocatioInfo>Home</PageLocatioInfo>
+        <ArrowForwardIosIcon  style={{ color: '#0F2C59' }}/>
+        <PageLocatioInfo>Mosques</PageLocatioInfo>
+        <ArrowForwardIosIcon  style={{ color: '#0F2C59' }}/>
+        <PageLocatioInfo>Mosques Info</PageLocatioInfo>
+        </PageLocationWrap>
           <Title>{dataByID.mosque.name}</Title>
           <Text>Location: {dataByID.mosque.location}</Text>
           <Text>Info: {dataByID.mosque.info}</Text>

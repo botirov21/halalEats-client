@@ -12,6 +12,9 @@ export const FooterWrapper = styled.div`
   align-items: center;
   position: relative;
   padding: 0px 0px 30px 0px;
+  @media (max-width: 1024px) {
+    display: none;
+  }
 `;
 export const BackgroundShape = styled.div`
   height: 180px;
