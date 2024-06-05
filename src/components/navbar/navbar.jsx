@@ -1,5 +1,6 @@
 import React from "react";
 import {
+  HambugerWrapper,
   LinksWrapper,
   LoginWraper,
   NavLink,
@@ -11,6 +12,7 @@ import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
+import HamburgerMenu from "./hamburger";
 // import UK from "../../assets/uk.png";
 // import UZ from "../../assets/uz.png";
 // import KR from "../../assets/kr.png";
@@ -75,6 +77,9 @@ const Navbar = () => {
           Login
         </Button>
       </LoginWraper>
+      <HambugerWrapper>
+          <HamburgerMenu/>
+      </HambugerWrapper>
     </NavbarWrapper>
   );
 };
