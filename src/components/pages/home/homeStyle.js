@@ -195,14 +195,14 @@ export const SliderInfoWrapper = styled.div`
   box-shadow: -1px 10px 50px 0px rgba(29, 69, 239, 0.2);
   position: absolute;
   bottom: 100px;
-  margin-right: 300px;
+  margin-right: 140px;
   padding: 20px 0px;
   @media (max-width: 1024px) {
     position: absolute;
     display: flex;
     width: 70%; // Can change on mobile
     bottom: 50px;
-    left: 25px;
+    left: 70px;
     padding: 30px;
     gap: 20px;
   }
@@ -215,6 +215,8 @@ export const SliderInfoWrapper = styled.div`
     bottom: 25px;
     padding: 30px;
     gap: 20px;
+    left: 40px;
+
   }
 
   @media (max-width: 435px) {

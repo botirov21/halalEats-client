@@ -80,7 +80,7 @@ export const FilterWrapper = styled.div`
 display: flex;
 gap: 20px;
 padding-top:40px;
-width: 80%;
+width: 90%;
 justify-content: center;
   @media (max-width: 1024px) {
   }
@@ -163,17 +163,25 @@ gap: 40px;
 padding: 2% 10%;
 height: max-content;
 @media (max-width: 1200px) {
-  grid-template-areas: ' a a';
-  padding: 2% 1% 0% 5%;
-  }
-  @media (max-width: 820px) {
-  grid-template-areas: 'a';
-
+  display: grid;
+grid-template-areas: 'a a';
+gap: 40px;
+padding: 2% 10%;
+height: max-content;
+}
+@media (max-width: 820px) {
+  display: grid;
+grid-template-areas: ' a';
+gap: 40px;
+padding: 2% 10%;
+height: max-content;
   }
 @media (max-width: 435px) {
-    grid-template-areas: 'a';
-    gap: 20px;
-    padding: 3% 8%;
+  display: grid;
+grid-template-areas: 'a';
+gap: 40px;
+padding: 2% 2%;
+height: max-content;
 } 
 `
 
@@ -245,7 +253,7 @@ background: var(--White, #FFF);
 border-radius: 16px;
 border: 2px solid var(--Light-200, #D2DAFC);
 padding: 20px;
-width: 90%;
+width: 100%;
 transition: background 400ms ease;
 transition: transform 400ms ease-in;
 

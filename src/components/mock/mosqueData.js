@@ -3,11 +3,11 @@ export const card = {
     {
       id: 1,
       mosque: {
-        name: "Ummayad Mosque",
-        location: "Jeonju",
+        name: "Turkistan Mosque",
+        location: "Gwangju",
         info: "Whats the main concern towards this is that, the Majid isn’t just restricted just towards the Muslim nations, similarly as like other all Religion’s Holy Places, Masjid is likewise spreaded in the entire world. Consequently the 3 however nt the last, Masjid “AL Aqsa~Mosque” which is in Palestine.",
-        latitude: 35.8213,
-        longitude: 127.1480,
+        latitude: 35.171220,
+        longitude: 126.805668,
       },
     },
     {

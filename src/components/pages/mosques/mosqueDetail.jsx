@@ -12,10 +12,11 @@ import {
   Title,
   TitleWrapper,
 } from "./mosqueDetailStyle";
-import { card } from "../../mock/mosqueData";
 import MultiCarousel from "./multiCarusel";
-import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import { Box } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { ClipLoader } from "react-spinners";
+
+const BASEURL = "http://localhost:5050/api/v1/";
 
 const MosqueDetail = () => {
   const { id } = useParams();
@@ -27,60 +28,72 @@ const MosqueDetail = () => {
   useEffect(() => {
     const fetchMosque = async () => {
       try {
-        const mosqueData = await fetchMosqueById(id);
+        const response = await fetch(`${BASEURL}mosque/${id}`);
+        const mosqueData = await response.json();
         if (mosqueData) {
           setDataByID(mosqueData);
-          filterCarouselData(id);
-        } else {
-          setError("Mosque not found");
+          // Call fetchCarouselData with the current ID
+          fetchCarouselData(mosqueData._id);
         }
       } catch (error) {
         console.error("Error fetching mosque:", error);
         setError("Failed to fetch mosque");
       } finally {
-        setLoading(false);
+        setLoading(false);  
       }
     };
-
+  
     fetchMosque();
   }, [id]);
+  console.log("data id", dataByID)
+  useEffect(() => {
+    if (dataByID) {
+      fetchCarouselData(dataByID._id);
+    }
+  }, [dataByID]);
 
-  const filterCarouselData = (currentId) => {
-    const filteredData = card.MosqueList.filter(
-      (mosque) => mosque.id !== parseInt(currentId)
-    );
-    setCarouselData(filteredData);
-  };
-
-  const handleCarouselItemClick = async (selectedId) => {
+  const fetchCarouselData = async (currentId) => {
     try {
-      const mosqueData = await fetchMosqueById(selectedId);
-      if (mosqueData) {
-        setDataByID(mosqueData);
-        filterCarouselData(selectedId);
-      } else {
-        setError("Mosque not found");
-      }
+      const response = await fetch(`${BASEURL}mosque/allMosques`);
+      const data = await response.json();
+      
+      const allMosques = Array.isArray(data.data) ? data.data : [];
+  
+      const filteredData = allMosques.filter((mosque) => mosque._id !== currentId);
+      setCarouselData(filteredData);
     } catch (error) {
-      console.error("Error fetching mosque:", error);
-      setError("Failed to fetch mosque");
+      console.error("Error fetching carousel data:", error);
     }
   };
+  
+  console.log("carusel da",carouselData)
 
-  const fetchMosqueById = async (id) => {
-    // Simulated API call
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const mosque = card.MosqueList.find((mosque) => mosque.id === parseInt(id));
-    return mosque;
-  };
+  // const handleCarouselItemClick = async (selectedId) => {
+  //   try {
+  //     setLoading(true);
+  //     const response = await fetch(`${BASEURL}mosque/${selectedId}`);
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error! status: ${response.status}`);
+  //     }
+  //     const mosqueData = await response.json();
+  //     console.log(mosqueData); // Log to check the structure
+  //     setDataByID(mosqueData);
+  //     fetchCarouselData(selectedId);
+  //   } catch (error) {
+  //     console.error("Error fetching mosque:", error);
+  //     setError("Failed to fetch mosque");
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [id]);
 
   useEffect(() => {
-    if (dataByID && dataByID.mosque.latitude && dataByID.mosque.longitude) {
-      loadKakaoMap(dataByID.mosque.latitude, dataByID.mosque.longitude);
+    if (dataByID?.latitude && dataByID?.longitude) {
+      loadKakaoMap(dataByID.latitude, dataByID.longitude);
     }
   }, [dataByID]);
 
@@ -88,8 +101,7 @@ const MosqueDetail = () => {
     if (!window.kakao || !window.kakao.maps) {
       await new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src =
-          "https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c857e664f6baf7d60a3e9d714334227e";
+        script.src = "https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c857e664f6baf7d60a3e9d714334227e";
         script.async = true;
         script.onload = resolve;
         script.onerror = reject;
@@ -107,14 +119,15 @@ const MosqueDetail = () => {
           };
           const map = new window.kakao.maps.Map(mapContainer, options);
 
-          const markerPosition = new window.kakao.maps.LatLng(
-            latitude,
-            longitude
-          );
+          const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
           marker.setMap(map);
+
+          mapContainer.addEventListener("click", () => {
+            window.location.href = `https://kko.to/8IHMS311Fh?lat=${latitude}&lng=${longitude}`;
+          });
         } else {
           console.error("Map container not found");
         }
@@ -125,7 +138,9 @@ const MosqueDetail = () => {
   if (loading) {
     return (
       <DetailWrapper>
-        <p>Loading...</p>
+        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+          <ClipLoader size={50} color={"#123abc"} loading={loading} />
+        </div>
       </DetailWrapper>
     );
   }
@@ -143,25 +158,22 @@ const MosqueDetail = () => {
       <Container>
         <ResposiveImageWrapper/>
         <TitleWrapper>
-        <PageLocationWrap>
-        <PageLocatioInfo>Home</PageLocatioInfo>
-        <ArrowForwardIosIcon  style={{ color: '#0F2C59' }}/>
-        <PageLocatioInfo>Mosques</PageLocatioInfo>
-        <ArrowForwardIosIcon  style={{ color: '#0F2C59' }}/>
-        <PageLocatioInfo>Mosques Info</PageLocatioInfo>
-        </PageLocationWrap>
-          <Title>{dataByID.mosque.name}</Title>
-          <Text>Location: {dataByID.mosque.location}</Text>
-          <Text>Info: {dataByID.mosque.info}</Text>
+          <PageLocationWrap>
+            <PageLocatioInfo>Home</PageLocatioInfo>
+            <ArrowForwardIosIcon style={{ color: "#0F2C59" }} />
+            <PageLocatioInfo>Mosques</PageLocatioInfo>
+            <ArrowForwardIosIcon style={{ color: "#0F2C59" }} />
+            <PageLocatioInfo>Mosques Info</PageLocatioInfo>
+          </PageLocationWrap>
+          <Title>{dataByID?.name}</Title>
+          <Text>Location: {dataByID?.location}</Text>
+          <Text>Info: {dataByID?.info}</Text>
         </TitleWrapper>
-        <ImageWrapper />
+        <ImageWrapper/>
       </Container>
-      <Title> Mosque Location</Title>
+      <Title>Mosque Location</Title>
       <Map id="map" />
-      <MultiCarousel
-        data={carouselData}
-        onItemClick={handleCarouselItemClick}
-      />
+        <MultiCarousel data={carouselData} />
     </DetailWrapper>
   );
 };
