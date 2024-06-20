@@ -47,7 +47,7 @@ export default function HamburgerMenu() {
         <NavLink to="/fullTime">
           <Pages>Halal Restaurants</Pages>
         </NavLink>
-        <NavLink to="/partTime">
+        <NavLink to="/markets">
           <Pages>Halal Markets</Pages>
         </NavLink>
       </Hamburgerdata>

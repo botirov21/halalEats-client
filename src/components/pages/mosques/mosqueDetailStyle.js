@@ -1,10 +1,15 @@
 import styled from "styled-components";
 import Image  from "../../../assets/mosqueImage.png"
+import { Link } from "react-router-dom";
 
+
+export const PageLink = styled(Link)`
+text-decoration: none;
+`
 export const DetailWrapper = styled.div`
 display: flex;
 flex-direction: column;
-padding:100px;
+padding:100px 150px;
 height:fit-content;
 align-items: center;
 gap: 50px;
@@ -14,13 +19,15 @@ gap: 50px;
 }
 `
 export const PageLocationWrap = styled.div`
+gap: 10px;
 display: flex;
 align-items: center;
+justify-content: center;
 padding: 10px;
 border-radius: 8px;
 border: 1px solid var(--Light-200, #D2DAFC);
 background: var(--Light-100, #F0F2FC);
-width: 40%;
+width: 50%;
 @media (max-width: 1200px) {
 display: none;
 }
@@ -36,7 +43,7 @@ line-height: 20px;
 export const Container = styled.div`
 display: flex;
 height:fit-content;
-gap: 40px;
+width:100%;
 @media (max-width: 1200px) {
 flex-direction:column;
 }

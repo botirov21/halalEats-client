@@ -24,7 +24,7 @@ import {
   SelectFilter,
   seeMoreButton,
 } from "./mosqueStyle";
-import Select, { selectClasses } from "@mui/joy/Select";
+import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
 import KeyboardArrowDown from "@mui/icons-material/KeyboardArrowDown";
 import { Button } from "@mui/material";
@@ -43,12 +43,15 @@ const Mosques = () => {
   const [selectedProvince, setSelectedProvince] = useState('');
   const [cityOptions, setCityOptions] = useState([]);
   const [selectedCity, setSelectedCity] = useState('');
+  const [inputSearch, setInputSearch] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     const fetchMosques = async () => {
       try {
         const response = await fetch(`${BASEURL}mosque/allMosques`);
         const data = await response.json();
+        setFilteredData(data.data);
         setAllData(data.data);
       } catch (err) {
         console.error(err);
@@ -59,12 +62,23 @@ const Mosques = () => {
     };
 
     fetchMosques();
-  }, []);
-
-  useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
 
+  }, []);
+  
+
+
+
+  // Input Search Data
+  const handleInputSearch = (query) => {
+    setInputSearch(query);
+    const filtered = allData.filter((data) => {
+      const name = data.name?.toLowerCase() || '';
+      return name.includes(query.toLowerCase());
+    });
+    setFilteredData(filtered);
+  };
+  
   const handleProvinceChange = (value) => {
     setSelectedProvince(value);
 
@@ -77,7 +91,6 @@ const Mosques = () => {
       'Jeollanam-do': ['Mokpo', 'Yeosu'],
       'Gyeongsangbuk-do': ['Pohang', 'Gyeongju'],
       'Gyeongsangnam-do': ['Changwon', 'Gimhae'],
-      // Add metropolitan cities here:
     };
 
     setCityOptions(cities[value] || []);
@@ -96,13 +109,9 @@ const Mosques = () => {
     );
   }
 
-  if (error) {
-    return <div style={{ color: 'red', textAlign: 'center' }}>{error}</div>;
-  }
 
-  if (allData.length === 0) {
-    return <div style={{ textAlign: 'center' }}>No mosques found.</div>;
-  }
+
+
 
   return (
     <MosquesWrapper>
@@ -110,8 +119,7 @@ const Mosques = () => {
         <MosqueTitle>Mosques</MosqueTitle>
         <MosqueTextWrap>
           <MosqueText>
-            Find mosques near you easily with us. Choose your country and city
-            of residence and find it easily.
+            Find mosques near you easily with us. Choose your country and city of residence and find it easily.
           </MosqueText>
         </MosqueTextWrap>
         <FilterWrapper>
@@ -125,15 +133,15 @@ const Mosques = () => {
               sx={{
                 width: "25%",
                 padding: 2,
-                [`& .${selectClasses.indicator}`]: {
+                [`& .MuiSelect-indicator`]: {
                   transition: "0.2s",
-                  [`&.${selectClasses.expanded}`]: {
+                  [`&.Mui-expanded`]: {
                     transform: "rotate(-180deg)",
                   },
                 },
               }}
             >
-              <Option value="Metropolitan Cities">Metropolitan Cities</Option>
+              <Option value="Metropolitan Cities" >Metropolitan Cities</Option>
               <Option value="Gyeonggi-do">Gyeonggi-do</Option>
               <Option value="Gangwon-do">Gangwon-do</Option>
               <Option value="Chungcheongbuk-do">Chungcheongbuk-do</Option>
@@ -151,14 +159,14 @@ const Mosques = () => {
               sx={{
                 width: "25%",
                 padding: 2,
-                [`& .${selectClasses.indicator}`]: {
+                [`& .MuiSelect-indicator`]: {
                   transition: "0.2s",
-                  [`&.${selectClasses.expanded}`]: {
+                  [`&.Mui-expanded`]: {
                     transform: "rotate(-180deg)",
                   },
                 },
               }}
-              disabled={!selectedProvince} // Disable city select if no province is selected
+              disabled={!selectedProvince}
             >
               {cityOptions.map((city, index) => (
                 <Option key={index} value={city}>{city}</Option>
@@ -167,6 +175,7 @@ const Mosques = () => {
           </SelectFilter>
           <Input
             className="InputStyle"
+            onChange={(e) => handleInputSearch(e.target.value)}
             endDecorator={
               <>
                 <InputBtn>
@@ -204,30 +213,30 @@ const Mosques = () => {
         </FilterWrapper>
       </MosqueBg>
       <CardWrapper>
-  <Bounce>
-    {allData.map((value, key) => (
-      <MosqueLink key={key} to={`/mosqueDetail/${value._id}`}>
-        <Card>
-          <Image />
-          <NameWrapper>
-            <Name>{value.name}</Name>
-            <CardButton>
-              <ArrowOutwardIcon sx={LocationIconStyle} />
-            </CardButton>
-          </NameWrapper>
-          <LocationWrapper>
-            <LocationOnIcon sx={LocationIconStyle} />
-            {value.metropolitanCity ? (
-              <Location>{value.metropolitanCity}</Location>
-            ) : (
-              <Location>{value.city}</Location>
-            )}
-          </LocationWrapper>
-        </Card>
-      </MosqueLink>
-    ))}
-  </Bounce>
-</CardWrapper>
+        <Bounce>
+          {filteredData && filteredData.map((value, key) => (
+            <MosqueLink key={key} to={`/mosqueDetail/${value._id}`}>
+              <Card>
+                <Image />
+                <NameWrapper>
+                  <Name>{value.name}</Name>
+                  <CardButton>
+                    <ArrowOutwardIcon sx={LocationIconStyle} />
+                  </CardButton>
+                </NameWrapper>
+                <LocationWrapper>
+                  <LocationOnIcon sx={LocationIconStyle} />
+                  {value.metropolitanCity ? (
+                    <Location>{value.metropolitanCity}</Location>
+                  ) : (
+                    <Location>{value.city}</Location>
+                  )}
+                </LocationWrapper>
+              </Card>
+            </MosqueLink>
+          ))}
+        </Bounce>
+      </CardWrapper>
 
       <ButtonWrapper>
         <Button sx={seeMoreButton} variant="contained">

@@ -6,6 +6,7 @@ import {
   NavLink,
   NavbarLink,
   NavbarWrapper,
+  ResponsiveButton,
   WebsiteName,
 } from "./navbarStyle";
 import Button from "@mui/material/Button";
@@ -34,11 +35,13 @@ const Navbar = () => {
           <NavbarLink>Mosques</NavbarLink>
         </NavLink>
         <NavbarLink>Restaurants</NavbarLink>
-        <NavbarLink>Markets</NavbarLink>
+        <NavLink to="/markets">
+          <NavbarLink>Markets</NavbarLink>
+        </NavLink>
       </LinksWrapper>
       <LoginWraper>
         <FormControl
-          sx={{ m: 0, minWidth: 80, display: "flex",  alignItems: "center" }}
+          sx={{ m: 0, minWidth: 80, display: "flex", alignItems: "center" }}
           size="small"
         >
           <Select
@@ -59,27 +62,29 @@ const Navbar = () => {
             <MenuItem value={20}>
               {/* <img src={UZ} alt="" /> */}
               UZ
-              </MenuItem>
+            </MenuItem>
             <MenuItem value={30}>
               {/* <img src={KR} alt="" /> */}
               KR
             </MenuItem>
           </Select>
         </FormControl>
-        <Button
-          sx={{
-            background: "var(--Light-Main-500, #1D45EF);",
-            padding: "10px 30px 10px 30px",
-            borderRadius: "10px"
-          }}
-          variant="contained"
-        >
-          Login
-        </Button>
+        <HambugerWrapper>
+          <HamburgerMenu />
+        </HambugerWrapper>
+        <ResponsiveButton>
+          <Button
+            sx={{
+              background: "var(--Light-Main-500, #1D45EF);",
+              padding: "10px 30px 10px 30px",
+              borderRadius: "10px",
+            }}
+            variant="contained"
+          >
+            Login
+          </Button>
+        </ResponsiveButton>
       </LoginWraper>
-      <HambugerWrapper>
-          <HamburgerMenu/>
-      </HambugerWrapper>
     </NavbarWrapper>
   );
 };

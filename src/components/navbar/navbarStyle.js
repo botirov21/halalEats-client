@@ -16,7 +16,7 @@ align-items:center;
 border-bottom: white solid 1px;
 position:fixed;
 z-index:3;
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     justify-content: space-between;
     padding: 0px 20px
 }
@@ -55,24 +55,24 @@ font-family: Raleway;
 font-size: 20px;
 font-style: normal;
 font-weight: 600;
-line-height: 30px; 
+line-height: 30px;
+&:hover{
+    border-bottom: 2px solid  #1D45EF;
+} 
 `
-export const LoginWraper = styled.div`
+export const ResponsiveButton = styled.div`
 display:flex;
-@media (max-width: 1024px) {
-    display:flex;
-    justify-content: space-between;
-}
-@media (max-width: 820px) {
-  }
-  @media (max-width: 435px) {
+@media (max-width: 1200px) {
     display: none
 
 }
 `
+export const LoginWraper = styled.div`
+display:flex;
+`
 export const HambugerWrapper = styled.div`
 display: none;
-@media (max-width: 435px){
+@media (max-width: 1200px){
 display: flex;
 width: 36px;
 height: 36px;

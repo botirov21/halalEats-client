@@ -1,106 +1,85 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import {
+  CaruselWrapper,
   Container,
+  DetailImage,
+  DetailImage2,
   DetailWrapper,
+  ImageWrappeRight,
   ImageWrapper,
+  ImageWrapperLeft,
+  LinedDiv,
+  MainImageWrap,
   Map,
+  MapWrapper,
+  Name,
   PageLink,
   PageLocatioInfo,
   PageLocationWrap,
+  PoductsWrap,
+  Price,
+  Product,
+  ProductImg,
+  Products,
+  ProductsContainer,
   ResposiveImageWrapper,
   Text,
   Title,
+  TitleWrap,
   TitleWrapper,
-} from "./mosqueDetailStyle";
+} from "./marketDetailStyle"; // Ensure this path and file are correct
 import MultiCarousel from "./multiCarusel";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { ClipLoader } from "react-spinners";
-
+import { card } from "../../mock/productData";
 const BASEURL = "http://localhost:5050/api/v1/";
 
-const MosqueDetail = () => {
+const MarketDetail = () => {
   const { id } = useParams();
   const [dataByID, setDataByID] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [carouselData, setCarouselData] = useState([]);
+  const allData = card.ProductList;
   useEffect(() => {
-    const fetchMosqueData = async () => {
+    const fetchMarketData = async () => {
       try {
-        setLoading(true); 
-        const response = await fetch(`${BASEURL}mosque/${id}`);
-        const mosqueData = await response.json();
-        if (mosqueData && mosqueData.data) {
-          setDataByID(mosqueData.data);
-
-          // Fetch carousel data
-          fetchCarouselData(mosqueData.data._id);
+        setLoading(true);
+        const response = await fetch(`${BASEURL}market/${id}`);
+        const marketData = await response.json();
+        if (marketData) {
+          setDataByID(marketData);
+          fetchCarouselData(marketData._id);
         } else {
-          setError("Failed to fetch mosque data");
+          setError("Failed to fetch Market data: No data found");
         }
       } catch (error) {
-        console.error("Error fetching mosque:", error);
-        setError("Failed to fetch mosque");
+        console.error("Error fetching market:", error);
+        setError(`Failed to fetch market: ${error.message}`);
       } finally {
-        setLoading(false); 
+        setLoading(false);
       }
     };
 
     const fetchCarouselData = async (currentId) => {
       try {
-        const response = await fetch(`${BASEURL}mosque/allMosques`);
+        const response = await fetch(`${BASEURL}market/allMarkets`);
         const data = await response.json();
-        const allMosques = Array.isArray(data.data) ? data.data : [];
-        const filteredData = allMosques.filter((mosque) => mosque._id !== currentId);
+        console.log("Carousel data:", data);
+        const allMarkets = Array.isArray(data.data) ? data.data : [];
+        const filteredData = allMarkets.filter(
+          (market) => market._id !== currentId
+        );
         setCarouselData(filteredData);
       } catch (error) {
         console.error("Error fetching carousel data:", error);
       }
     };
 
-    // Scroll to top
     window.scrollTo(0, 0);
-
-    fetchMosqueData();
-
-  }, [id]); 
-
-  // const fetchCarouselData = async (currentId) => {
-  //   try {
-  //     const response = await fetch(`${BASEURL}mosque/allMosques`);
-  //     const data = await response.json();
-      
-  //     const allMosques = Array.isArray(data.data) ? data.data : [];
-  
-  //     const filteredData = allMosques.filter((mosque) => mosque._id !== currentId);
-  //     setCarouselData(filteredData);
-  //   } catch (error) {
-  //     console.error("Error fetching carousel data:", error);
-  //   }
-  // };
-
-
-  // const handleCarouselItemClick = async (selectedId) => {
-  //   try {
-  //     setLoading(true);
-  //     const response = await fetch(`${BASEURL}mosque/${selectedId}`);
-  //     if (!response.ok) {
-  //       throw new Error(`HTTP error! status: ${response.status}`);
-  //     }
-  //     const mosqueData = await response.json();
-  //     console.log(mosqueData); // Log to check the structure
-  //     setDataByID(mosqueData);
-  //     fetchCarouselData(selectedId);
-  //   } catch (error) {
-  //     console.error("Error fetching mosque:", error);
-  //     setError("Failed to fetch mosque");
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-
-
+    fetchMarketData();
+  }, [id]);
 
   useEffect(() => {
     if (dataByID?.latitude && dataByID?.longitude) {
@@ -112,7 +91,8 @@ const MosqueDetail = () => {
     if (!window.kakao || !window.kakao.maps) {
       await new Promise((resolve, reject) => {
         const script = document.createElement("script");
-        script.src = "https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c857e664f6baf7d60a3e9d714334227e";
+        script.src =
+          "https://dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=c857e664f6baf7d60a3e9d714334227e";
         script.async = true;
         script.onload = resolve;
         script.onerror = reject;
@@ -130,7 +110,10 @@ const MosqueDetail = () => {
           };
           const map = new window.kakao.maps.Map(mapContainer, options);
 
-          const markerPosition = new window.kakao.maps.LatLng(latitude, longitude);
+          const markerPosition = new window.kakao.maps.LatLng(
+            latitude,
+            longitude
+          );
           const marker = new window.kakao.maps.Marker({
             position: markerPosition,
           });
@@ -149,7 +132,14 @@ const MosqueDetail = () => {
   if (loading) {
     return (
       <DetailWrapper>
-        <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+          }}
+        >
           <ClipLoader size={50} color={"#123abc"} loading={loading} />
         </div>
       </DetailWrapper>
@@ -167,33 +157,63 @@ const MosqueDetail = () => {
   return (
     <DetailWrapper>
       <Container>
-        <ResposiveImageWrapper/>
+        <ResposiveImageWrapper />
         <TitleWrapper>
           <PageLocationWrap>
-          <PageLink to= "/">
-             <PageLocatioInfo>Home</PageLocatioInfo>
+            <PageLink to="/">
+              <PageLocatioInfo>Home</PageLocatioInfo>
             </PageLink>
             <ArrowForwardIosIcon style={{ color: "#0F2C59" }} />
-            <PageLink to="/mosques">
-             <PageLocatioInfo>Mosques</PageLocatioInfo>
+            <PageLink to="/markets">
+              <PageLocatioInfo>Markets</PageLocatioInfo>
             </PageLink>
             <ArrowForwardIosIcon style={{ color: "#0F2C59" }} />
-            <PageLink to={`/mosqueDetail/${dataByID._id}`}>
-             <PageLocatioInfo>Mosques Info</PageLocatioInfo>
+            <PageLink to={`/marketDetail/${dataByID?._id}`}>
+              <PageLocatioInfo>Market Info</PageLocatioInfo>
             </PageLink>
           </PageLocationWrap>
           <Title>{dataByID?.name}</Title>
           <Text>Location: {dataByID?.location}</Text>
           <Text>Info: {dataByID?.info}</Text>
         </TitleWrapper>
-        <ImageWrapper/>
+        <ImageWrapper>
+          <ImageWrapperLeft>
+            <DetailImage />
+            <DetailImage2 />
+          </ImageWrapperLeft>
+          <ImageWrappeRight>
+            <DetailImage2 />
+            <DetailImage />
+          </ImageWrappeRight>
+        </ImageWrapper>
       </Container>
-      <Title>Mosque Location</Title>
-      <Map id="map" />
+      <PoductsWrap>
+        <TitleWrap>
+          <Title>Avaiable products</Title>
+        </TitleWrap>
+        <ProductsContainer>
+          <MainImageWrap />
+          <Products>
+            {allData.map((value, key) => (
+              <Product key={key}>
+                <ProductImg />
+                <Name>{value.product.name}</Name>
+                <LinedDiv />
+                <Price>{value.product.price}</Price>
+              </Product>
+            ))}
+          </Products>
+        </ProductsContainer>
+      </PoductsWrap>
+      <Title>Market Location</Title>
+      <MapWrapper>
+        <Map id="map" />
+      </MapWrapper>
+      <CaruselWrapper>
         <MultiCarousel data={carouselData} />
+      </CaruselWrapper>
     </DetailWrapper>
   );
-  
 };
 
-export default MosqueDetail;
+export default MarketDetail;
