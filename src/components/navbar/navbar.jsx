@@ -34,7 +34,9 @@ const Navbar = () => {
         <NavLink to="/mosques">
           <NavbarLink>Mosques</NavbarLink>
         </NavLink>
-        <NavbarLink>Restaurants</NavbarLink>
+        <NavLink to="/restaurants">
+          <NavbarLink>Restaurants</NavbarLink>
+        </NavLink>
         <NavLink to="/markets">
           <NavbarLink>Markets</NavbarLink>
         </NavLink>
