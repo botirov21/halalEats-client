@@ -18,9 +18,17 @@ import {
   CardInfos,
   ImageWrapper,
   Name,
-  Location,
   OpeningHours,
   WorkingDays,
+  RestaurantLink,
+  City,
+  OpeningHoursWrap,
+  WorkingDaysWrap,
+  RatingWrapper,
+  Feedbacks,
+  ActionsWrapper,
+  RateWrappper,
+  TitleWrapper,
 } from "./restaurantsStyle";
 import Select from "@mui/joy/Select";
 import Option from "@mui/joy/Option";
@@ -31,6 +39,10 @@ import SearchIcon from "@mui/icons-material/Search";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ArrowOutwardIcon from "@mui/icons-material/ArrowOutward";
 import { Bounce } from "react-awesome-reveal";
+import workingHours from "../../../assets/restaurantHours-icon.svg";
+import workingDays from "../../../assets/restaurantDays-icon.svg";
+import likeIcon from "../../../assets/restaurantLike-icon.svg";
+import unLikeIcon from "../../../assets/restaurantUnlike-icon.svg";
 
 const BASEURL = "http://localhost:5050/api/v1/";
 
@@ -47,7 +59,7 @@ const Restaurants = () => {
   useEffect(() => {
     const fetchMarkets = async () => {
       try {
-        const response = await fetch(`${BASEURL}market/allMarkets`);
+        const response = await fetch(`${BASEURL}restaurant/allRestaurants`);
         const data = await response.json();
         setFilteredData(data.data);
         setAllData(data.data);
@@ -220,23 +232,45 @@ const Restaurants = () => {
         </FilterWrapper>
       </RestaurantBg>
       <CardWrapper>
-        <Card>
-          <CardInfos>
-            <Name>Turkistan</Name>
-            <Location>Seoul, South Korea</Location>
-            <OpeningHours>Open 9.00 : Close 21:00</OpeningHours>
-            <WorkingDays>6 days a week</WorkingDays>
-          </CardInfos>
-          <ImageWrapper/>
-        </Card>
-        <Card>
-          <CardInfos>
-            
-          </CardInfos>
-          <ImageWrapper/>
-        </Card>
+        <Bounce>
+          {filteredData &&
+            filteredData.map((value, key) => (
+              <RestaurantLink key={key} to={`/restaurantDetail/${value._id}`}>
+                <Card>
+                  <CardInfos>
+                    <TitleWrapper>
+                    <Name>{value.name}</Name>
+                    <City>
+                      {" "}
+                      {value.metropolitanCity ? (
+                        <City>{value.metropolitanCity}</City>
+                      ) : (
+                        <City>{value.city}</City>
+                      )}
+                    </City>
+                    </TitleWrapper>
+                    <OpeningHoursWrap>
+                      <img src={workingHours} alt="workingHours" />
+                      <OpeningHours>{value.workingHours}</OpeningHours>
+                    </OpeningHoursWrap>
+                    <WorkingDaysWrap>
+                      <img src={workingDays} alt="workingDays" />
+                      <WorkingDays>{value.workingDays}</WorkingDays>
+                    </WorkingDaysWrap>
+                    <ActionsWrapper>
+                      <RateWrappper>
+                        <img src={likeIcon} alt="likeIcon" />
+                        <img src={unLikeIcon} alt="unLikeIcon" />
+                      </RateWrappper>
+                      <Feedbacks>View 14 feedbacks</Feedbacks>
+                    </ActionsWrapper>
+                  </CardInfos>
+                  <ImageWrapper />
+                </Card>
+              </RestaurantLink>
+            ))}
+        </Bounce>
       </CardWrapper>
-
       <ButtonWrapper>
         <Button sx={seeMoreButton} variant="contained">
           See More

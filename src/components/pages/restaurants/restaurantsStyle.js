@@ -2,7 +2,8 @@ import styled from "styled-components"
 import { Link } from "react-router-dom";
 import restaurantBg from "../../../assets/restaurantBg.png"
 import restauranImage from "../../../assets/restauranImage.png"
-export const MosqueLink = styled(Link)`
+
+export const RestaurantLink = styled(Link)`
   text-decoration: none;
   width: 100%;
 `;
@@ -10,6 +11,9 @@ export const RestaurantWrapper = styled.div`
 padding-top: 70px;
 padding-bottom: 100px;
 height: max-content;
+display: flex;
+flex-direction: column;
+align-items: center;
 @media (max-width: 1024px) {
   }
 @media (max-width: 820px) {
@@ -158,45 +162,93 @@ display: none;
 
 export const CardWrapper =  styled.div`
 display: grid;
-grid-template-areas: 'a a'
+grid-template-areas: 'a a';
+padding: 5% 8%;
+gap: 40px;
 `
 export const Card =  styled.div`
 display: flex;
+justify-content: space-between;
 border-radius: 16px;
 border: 2px solid var(--Light-200, #D2DAFC);
 background: #FFF;
-`
+` 
 export const CardInfos =  styled.div`
 display: flex;
-flex-direction: column
+flex-direction: column;
+padding: 25px 0px 0px 25px;
+gap: 10px;
+`
+export const TitleWrapper =  styled.div`
+display: flex;
+flex-direction: column;
+gap: 4px;
 `
 export const Name =  styled.p`
-display: grid;
-grid-template-rows: '1fr 1frs'
+color: var(--Dark-Main-500, #0E1625);
+font-family: Raleway;
+font-size: 28px;
+font-style: normal;
+font-weight: 600;
+line-height: 36px;
 `
-export const Location =  styled.p`
-display: grid;
-grid-template-areas: 'a a a';
+export const City =  styled.p`
+color: var(--Dark-400, #273248);
+font-family: Raleway;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px;
 `
 
+export const OpeningHoursWrap =  styled.div`
+display: flex;
+gap: 10px;
+`
 export const OpeningHours =  styled.p`
-display: grid;
-grid-template-areas: 'a a a';
+color: var(--Dark-Main-500, #0E1625);
+font-family: Raleway;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px; 
+`
+export const WorkingDaysWrap =  styled.div`
+display: flex;
+gap: 10px;
 `
 export const WorkingDays =  styled.p`
-display: grid; 
-grid-template-rows: '1fr 1frs'
+color: var(--Dark-Main-500, #0E1625);
+font-family: Raleway;
+font-size: 16px;
+font-style: normal;
+font-weight: 400;
+line-height: 20px;
+`
+export const ActionsWrapper =  styled.div`
+display: flex;
+padding: 10px 0px;
+border-top: solid 1px #D2DAFC;
+gap: 40px;
+`
+export const RateWrappper =  styled.div`
+display: flex;
+gap: 20px;
+`
+export const Feedbacks =  styled.p`
+color: var(--Light-Main-500, #1D45EF);
+font-family: Raleway;
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: 30px;
 `
 export const ImageWrapper =  styled.p`
-height: 180px;
-width: 200px;
+width: 280px;
 background-image: url(${restauranImage});
 background-size: cover;
 background-repeat: no-repeat;
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
+border-radius: 0px 16px 16px 0px;
 `
 
 export const ButtonWrapper = styled.div`
